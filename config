@@ -1,0 +1,26 @@
+;; Simple Configuration
+;; Fullscreen, save all, open terminal and quit emacs without message
+(custom-set-variables
+ '(initial-frame-alist (quote ((fullscreen . maximized)))))
+(map!
+ :leader
+ :desc "Save all" "f S" #'save-some-buffers
+ :desc "Open Terminal" "T" #'eshell)
+(setq confirm-kill-emacs nil)
+
+;; Org Configuration
+;; Keybind to time stamp, Org-agenda files and a intercative todo.
+(map! :mode org-mode
+      :map org-mode-map
+      "C-c ." #'org-time-stamp-inactive)
+(after! org-agenda
+  (setq org-agenda-files '("~/Org-files/Tarefas.org"
+                           "~/Org-files/Agenda.org")))
+(after! org
+  (defun my/org-enter-and-down ()
+    (interactive)
+    (org-todo "TODO")
+    (next-line))
+
+  (map! :map org-mode-map
+        "C-c C-c" #'my/org-enter-and-down))
