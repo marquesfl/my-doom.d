@@ -76,9 +76,10 @@
 ;; they are implemented.
 
 ;; Simple Configuration
-;; Fullscreen, save all, open terminal and quit emacs without message
+;; Fullscreen, font-size, save all, open terminal and quit emacs without message
 (custom-set-variables
  '(initial-frame-alist (quote ((fullscreen . maximized)))))
+(setq doom-font (font-spec :size 20))
 (map!
  :leader
  :desc "Save all" "f S" #'save-some-buffers
